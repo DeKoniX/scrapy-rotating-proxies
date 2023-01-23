@@ -24,4 +24,11 @@ def extract_proxy_hostport(proxy):
     >>> extract_proxy_hostport('http://foo:bar@baz:1234')
     'baz:1234'
     """
-    return _parse_proxy(proxy)[3]
+    proxy = _parse_proxy(proxy)
+    proxy_str = ''
+    if proxy[1] is not None:
+        proxy_str += proxy[1]
+        if proxy[2] is not None:
+            proxy_str += ':' + proxy[2]
+        proxy_str += '@'
+    return proxy_str + proxy[3]
